@@ -45,7 +45,7 @@ export const EcommerceTemplate = ({
   const { hasCollections, loading: loadingCollections } = useCollections()
 
   const header = (
-    <div className={`py-2 ${headerClassName}`}>
+    <div className={`py-4 border-b ${headerClassName}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -53,24 +53,24 @@ export const EcommerceTemplate = ({
 
           {/* Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <nav className="flex space-x-6">
+            <nav className="flex space-x-8">
               {!loadingCollections && hasCollections && (
                 <ScrollLink 
                   to="/#collections" 
-                  className="text-foreground/70 hover:text-foreground transition-colors"
+                  className="text-sm font-light tracking-widest uppercase text-foreground/70 hover:text-foreground transition-colors"
                 >
-                  Collections
+                  Colecciones
                 </ScrollLink>
               )}
               <ScrollLink 
                 to="/#products" 
-                className="text-foreground/70 hover:text-foreground transition-colors"
+                className="text-sm font-light tracking-widest uppercase text-foreground/70 hover:text-foreground transition-colors"
               >
-                Products
+                Productos
               </ScrollLink>
               <Link 
                 to="/blog" 
-                className="text-foreground/70 hover:text-foreground transition-colors"
+                className="text-sm font-light tracking-widest uppercase text-foreground/70 hover:text-foreground transition-colors"
               >
                 Blog
               </Link>
@@ -113,30 +113,37 @@ export const EcommerceTemplate = ({
   )
 
   const footer = (
-    <div className={`bg-black text-white py-12 ${footerClassName}`}>
+    <div className={`bg-primary text-primary-foreground py-16 ${footerClassName}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
-            <BrandLogoLeft />
-            <p className="mt-4 text-white/70">
-              Your trusted online store
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src="/logo.svg" 
+                alt="Style Logo"
+                className="h-10 w-10 object-contain invert" 
+              />
+              <span className="text-2xl font-light tracking-widest">STYLE</span>
+            </div>
+            <p className="mt-4 font-light tracking-wide opacity-70">
+              Tu destino de moda contemporánea
             </p>
           </div>
 
           {/* Links */}
           <div>
-            <h3 className="font-semibold mb-4 text-white">Links</h3>
+            <h3 className="font-light tracking-widest uppercase text-sm mb-4">Enlaces</h3>
             <div className="space-y-2">
               <Link 
                 to="/" 
-                className="block text-white/70 hover:text-white transition-colors"
+                className="block font-light opacity-70 hover:opacity-100 transition-opacity"
               >
-                Home
+                Inicio
               </Link>
               <Link 
                 to="/blog" 
-                className="block text-white/70 hover:text-white transition-colors"
+                className="block font-light opacity-70 hover:opacity-100 transition-opacity"
               >
                 Blog
               </Link>
@@ -145,13 +152,13 @@ export const EcommerceTemplate = ({
 
           {/* Social Links */}
           <div>
-            <h3 className="font-semibold mb-4 text-white">Follow Us</h3>
+            <h3 className="font-light tracking-widest uppercase text-sm mb-4">Síguenos</h3>
             <SocialLinks />
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-white/20 text-center text-white/70">
-          <p>&copy; 2025 Your Store. All rights reserved.</p>
+        <div className="mt-12 pt-8 border-t border-primary-foreground/20 text-center opacity-60">
+          <p className="font-light tracking-wide">&copy; 2025 Style. Todos los derechos reservados.</p>
         </div>
       </div>
     </div>

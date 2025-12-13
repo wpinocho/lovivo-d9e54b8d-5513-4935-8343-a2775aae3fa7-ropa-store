@@ -1,6 +1,5 @@
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Search } from 'lucide-react';
+import heroImage from '@/assets/hero-fashion.jpg';
 import { ProductCard } from '@/components/ProductCard';
 import { CollectionCard } from '@/components/CollectionCard';
 import { FloatingCart } from '@/components/FloatingCart';
@@ -35,23 +34,42 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
       showCart={true}
     >
       {/* Hero Section */}
-      <section className="bg-background py-12 border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
-            Discover Our Products
-          </h1>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Find the best products at the best price. Guaranteed quality and fast shipping.
-          </p>
+      <section className="relative h-[600px] overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src={heroImage} 
+            alt="Fashion Hero" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/20" />
+        </div>
+        <div className="relative h-full flex items-center justify-center">
+          <div className="text-center text-white px-4">
+            <h1 className="text-5xl md:text-6xl font-light tracking-wide mb-6">
+              Estilo Atemporal
+            </h1>
+            <p className="text-lg md:text-xl mb-8 font-light tracking-wide max-w-2xl mx-auto">
+              Descubre nuestra colección de moda contemporánea
+            </p>
+            <Button 
+              size="lg" 
+              className="bg-white text-black hover:bg-white/90 px-8 py-6 text-base font-medium"
+              onClick={() => {
+                document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Explorar Colecciones
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Collections Section */}
       {!loadingCollections && collections.length > 0 && (
-        <section id="collections" className="py-12 bg-muted/30">
+        <section id="collections" className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-foreground mb-8">
-              Our Collections
+            <h2 className="text-3xl font-light tracking-wide text-center text-foreground mb-12">
+              Nuestras Colecciones
             </h2>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -68,21 +86,22 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
       )}
 
       {/* Products Section */}
-      <section id="products" className="py-12">
+      <section id="products" className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-foreground">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-3xl font-light tracking-wide text-foreground">
               {selectedCollectionId 
-                ? `Products from ${collections.find(c => c.id === selectedCollectionId)?.name || 'Collection'}` 
-                : 'Featured Products'
+                ? `${collections.find(c => c.id === selectedCollectionId)?.name || 'Colección'}` 
+                : 'Productos Destacados'
               }
             </h2>
             {selectedCollectionId && (
               <Button 
                 variant="outline" 
                 onClick={handleShowAllProducts}
+                className="font-light tracking-wide"
               >
-                See All Products
+                Ver Todos los Productos
               </Button>
             )}
           </div>
@@ -101,8 +120,8 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="text-muted-foreground">
-                No products available.
+              <p className="text-muted-foreground font-light tracking-wide">
+                No hay productos disponibles.
               </p>
             </div>
           )}
