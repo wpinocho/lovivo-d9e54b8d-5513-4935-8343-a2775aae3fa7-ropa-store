@@ -200,7 +200,8 @@ export const EcommerceTemplate = ({
                 {t('footer.contact', 'Contacto')}
               </Link>
               <Link to="/" className="block text-sm text-muted-foreground hover:text-foreground">
-                {t('footer.returns', 'Devoluciones')}</n              </Link>
+                {t('footer.returns', 'Devoluciones')}
+              </Link>
               <Link to="/" className="block text-sm text-muted-foreground hover:text-foreground">
                 {t('footer.shipping', 'Envíos')}
               </Link>
