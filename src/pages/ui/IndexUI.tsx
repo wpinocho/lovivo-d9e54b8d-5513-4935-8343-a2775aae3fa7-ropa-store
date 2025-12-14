@@ -6,6 +6,7 @@ import { FloatingCart } from '@/components/FloatingCart';
 import { NewsletterSection } from '@/components/NewsletterSection';
 import { EcommerceTemplate } from '@/templates/EcommerceTemplate';
 import type { UseIndexLogicReturn } from '@/components/headless/HeadlessIndex';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 /**
  * EDITABLE UI - IndexUI
@@ -28,6 +29,8 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
     handleViewCollectionProducts,
     handleShowAllProducts,
   } = logic;
+  
+  const { t } = useLanguage();
 
   return (
     <EcommerceTemplate 
@@ -46,10 +49,10 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
         <div className="relative h-full flex items-center justify-center">
           <div className="text-center text-white px-4">
             <h1 className="text-5xl md:text-6xl font-light tracking-wide mb-6">
-              Estilo Atemporal
+              {t('hero.title')}
             </h1>
             <p className="text-lg md:text-xl mb-8 font-light tracking-wide max-w-2xl mx-auto">
-              Descubre nuestra colección de moda contemporánea
+              {t('hero.subtitle')}
             </p>
             <Button 
               size="lg" 
@@ -58,7 +61,7 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
                 document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              Explorar Colecciones
+              {t('hero.cta')}
             </Button>
           </div>
         </div>
@@ -69,7 +72,7 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
         <section id="collections" className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-light tracking-wide text-center text-foreground mb-12">
-              Nuestras Colecciones
+              {t('collections.title')}
             </h2>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -91,8 +94,8 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
           <div className="flex items-center justify-between mb-12">
             <h2 className="text-3xl font-light tracking-wide text-foreground">
               {selectedCollectionId 
-                ? `${collections.find(c => c.id === selectedCollectionId)?.name || 'Colección'}` 
-                : 'Productos Destacados'
+                ? `${collections.find(c => c.id === selectedCollectionId)?.name || t('collections.title')}` 
+                : t('products.title')
               }
             </h2>
             {selectedCollectionId && (
@@ -101,7 +104,7 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
                 onClick={handleShowAllProducts}
                 className="font-light tracking-wide"
               >
-                Ver Todos los Productos
+                {t('products.viewmore')}
               </Button>
             )}
           </div>

@@ -343,7 +343,7 @@ export default function CheckoutUI() {
 
                 {/* Dirección de facturación */}
                 <section>
-                  <h3 className="text-lg font-semibold mb-4">Billing address</h3>
+                  <h3 className="text-lg font-semibold mb-4">{t('checkout.billing')}</h3>
                   <div className="space-y-4">
                     {/* Solo mostrar radio buttons cuando NO sea pickup */}
                     {!logic.usePickup && (
@@ -357,7 +357,7 @@ export default function CheckoutUI() {
                             onChange={() => logic.setUseSameAddress(true)}
                             className="w-4 h-4"
                           />
-                          <Label htmlFor="same-address">Same as shipping address</Label>
+                          <Label htmlFor="same-address">{t('checkout.same')}</Label>
                         </div>
                         <div className="flex items-center space-x-2">
                           <input
@@ -368,7 +368,7 @@ export default function CheckoutUI() {
                             onChange={() => logic.setUseSameAddress(false)}
                             className="w-4 h-4"
                           />
-                          <Label htmlFor="different-address">Use a different billing address</Label>
+                          <Label htmlFor="different-address">{t('checkout.different')}</Label>
                         </div>
                       </div>
                     )}
@@ -486,7 +486,7 @@ export default function CheckoutUI() {
 
                 {/* Pago */}
                 <section>
-                  <h3 className="text-lg font-semibold mb-4">Payment</h3>
+                  <h3 className="text-lg font-semibold mb-4">{t('checkout.payment')}</h3>
                   <StripePayment 
                     amountCents={Math.round(logic.finalTotal * 100)} 
                     currency={logic.currencyCode.toLowerCase()} 
@@ -646,7 +646,7 @@ export default function CheckoutUI() {
 
                   {/* Código de descuento */}
                   <div className="space-y-2">
-                    <div className="text-sm font-medium">Discount code</div>
+                    <div className="text-sm font-medium">{t('checkout.discount')}</div>
                     {!logic.discount ? (
                       <div className="flex gap-2">
                         <Input 
@@ -664,7 +664,7 @@ export default function CheckoutUI() {
                           disabled={logic.isValidatingCoupon || !logic.couponCode.trim()}
                         >
                           <Tag className="h-4 w-4 mr-1" />
-                          {logic.isValidatingCoupon ? '...' : 'Apply'}
+                          {logic.isValidatingCoupon ? '...' : t('checkout.applycoupon')}
                         </Button>
                       </div>
                     ) : (

@@ -11,6 +11,7 @@ import { SettingsProvider } from "@/contexts/SettingsContext";
 import { PixelProvider } from "@/contexts/PixelContext";
 import { PostHogProvider } from "@/contexts/PostHogContext";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import Product from "./pages/Product";
 import Blog from "./pages/Blog";
@@ -36,38 +37,40 @@ function PageViewTracker() {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <SettingsProvider>
-      <PixelProvider>
-        <PostHogProvider>
-          <AuthProvider>
-            <CartProvider>
-              <TooltipProvider>
-                <Toaster />
-                <Sonner />
-                <BrowserRouter>
-                  <CartUIProvider>
-                    <PageViewTracker />
-                    <Routes>
-                      <Route path="/" element={<Index />} />
-                      <Route path="/products/:slug" element={<Product />} />
-                      <Route path="/cart" element={<Cart />} />
-                      <Route path="/checkout" element={<Checkout />} />
-                      <Route path="/thank-you" element={<ThankYou />} />
-                      <Route path="/thank-you/:orderId" element={<ThankYou />} />
-                      <Route path="/my-orders" element={<MyOrders />} />
-                      <Route path="/blog" element={<Blog />} />
-                      <Route path="/blog/:slug" element={<BlogPost />} />
-                      {/* Aquí puedes agregar/modificar rutas */}
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-                  </CartUIProvider>
-                </BrowserRouter>
-              </TooltipProvider>
-            </CartProvider>
-          </AuthProvider>
-        </PostHogProvider>
-      </PixelProvider>
-    </SettingsProvider>
+    <LanguageProvider>
+      <SettingsProvider>
+        <PixelProvider>
+          <PostHogProvider>
+            <AuthProvider>
+              <CartProvider>
+                <TooltipProvider>
+                  <Toaster />
+                  <Sonner />
+                  <BrowserRouter>
+                    <CartUIProvider>
+                      <PageViewTracker />
+                      <Routes>
+                        <Route path="/" element={<Index />} />
+                        <Route path="/products/:slug" element={<Product />} />
+                        <Route path="/cart" element={<Cart />} />
+                        <Route path="/checkout" element={<Checkout />} />
+                        <Route path="/thank-you" element={<ThankYou />} />
+                        <Route path="/thank-you/:orderId" element={<ThankYou />} />
+                        <Route path="/my-orders" element={<MyOrders />} />
+                        <Route path="/blog" element={<Blog />} />
+                        <Route path="/blog/:slug" element={<BlogPost />} />
+                        {/* Aquí puedes agregar/modificar rutas */}
+                        <Route path="*" element={<NotFound />} />
+                      </Routes>
+                    </CartUIProvider>
+                  </BrowserRouter>
+                </TooltipProvider>
+              </CartProvider>
+            </AuthProvider>
+          </PostHogProvider>
+        </PixelProvider>
+      </SettingsProvider>
+    </LanguageProvider>
   </QueryClientProvider>
 );
 

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 import { HeadlessProductCard } from "@/components/headless/HeadlessProductCard"
 import type { Product } from "@/lib/supabase"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 /**
  * EDITABLE UI COMPONENT - ProductCardUI
@@ -23,6 +24,8 @@ interface ProductCardUIProps {
 }
 
 export const ProductCardUI = ({ product }: ProductCardUIProps) => {
+  const { t } = useLanguage()
+  
   return (
     <HeadlessProductCard product={product}>
       {(logic) => (
@@ -51,12 +54,12 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
                   )}
                   {logic.product.featured && (
                     <span className="bg-primary text-primary-foreground text-xs px-3 py-1 font-medium tracking-wide">
-                      NUEVO
+                      {t('products.featured')}
                     </span>
                   )}
                   {!logic.inStock && (
                     <span className="bg-muted text-muted-foreground text-xs px-3 py-1 font-medium tracking-wide">
-                      Agotado
+                      {t('products.soldout')}
                     </span>
                   )}
                 </div>
@@ -152,7 +155,7 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
                 disabled={!logic.canAddToCart}
                 className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground disabled:opacity-50 font-light tracking-wide"
               >
-                {logic.inStock ? 'Agregar al Carrito' : 'Agotado'}
+                {logic.inStock ? t('products.addtocart') : t('products.soldout')}
               </Button>
             </div>
           </CardContent>

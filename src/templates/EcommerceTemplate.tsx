@@ -12,6 +12,8 @@ import { useCart } from '@/contexts/CartContext'
 import { useCollections } from '@/hooks/useCollections'
 import { Input } from '@/components/ui/input'
 import { ScrollLink } from '@/components/ScrollLink'
+import { LanguageSelector } from '@/components/LanguageSelector'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 /**
  * EDITABLE TEMPLATE - EcommerceTemplate
@@ -43,6 +45,7 @@ export const EcommerceTemplate = ({
   const { getTotalItems } = useCart()
   const totalItems = getTotalItems()
   const { hasCollections, loading: loadingCollections } = useCollections()
+  const { t } = useLanguage()
 
   const header = (
     <div className={`py-4 border-b ${headerClassName}`}>
@@ -59,26 +62,27 @@ export const EcommerceTemplate = ({
                   to="/#collections" 
                   className="text-sm font-light tracking-widest uppercase text-foreground/70 hover:text-foreground transition-colors"
                 >
-                  Colecciones
+                  {t('nav.collections')}
                 </ScrollLink>
               )}
               <ScrollLink 
                 to="/#products" 
                 className="text-sm font-light tracking-widest uppercase text-foreground/70 hover:text-foreground transition-colors"
               >
-                Productos
+                {t('nav.products')}
               </ScrollLink>
               <Link 
                 to="/blog" 
                 className="text-sm font-light tracking-widest uppercase text-foreground/70 hover:text-foreground transition-colors"
               >
-                Blog
+                {t('nav.blog')}
               </Link>
             </nav>
           </div>
 
-          {/* Profile & Cart */}
+          {/* Profile, Language & Cart */}
           <div className="flex items-center space-x-2">
+            <LanguageSelector />
             <ProfileMenu />
             
             {showCart && (
@@ -127,38 +131,38 @@ export const EcommerceTemplate = ({
               <span className="text-2xl font-light tracking-widest">STYLE</span>
             </div>
             <p className="mt-4 font-light tracking-wide opacity-70">
-              Tu destino de moda contemporánea
+              {t('footer.tagline')}
             </p>
           </div>
 
           {/* Links */}
           <div>
-            <h3 className="font-light tracking-widest uppercase text-sm mb-4">Enlaces</h3>
+            <h3 className="font-light tracking-widest uppercase text-sm mb-4">{t('footer.links')}</h3>
             <div className="space-y-2">
               <Link 
                 to="/" 
                 className="block font-light opacity-70 hover:opacity-100 transition-opacity"
               >
-                Inicio
+                {t('footer.home')}
               </Link>
               <Link 
                 to="/blog" 
                 className="block font-light opacity-70 hover:opacity-100 transition-opacity"
               >
-                Blog
+                {t('nav.blog')}
               </Link>
             </div>
           </div>
 
           {/* Social Links */}
           <div>
-            <h3 className="font-light tracking-widest uppercase text-sm mb-4">Síguenos</h3>
+            <h3 className="font-light tracking-widest uppercase text-sm mb-4">{t('footer.follow')}</h3>
             <SocialLinks />
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-primary-foreground/20 text-center opacity-60">
-          <p className="font-light tracking-wide">&copy; 2025 Style. Todos los derechos reservados.</p>
+          <p className="font-light tracking-wide">&copy; 2025 Style. {t('footer.rights')}.</p>
         </div>
       </div>
     </div>

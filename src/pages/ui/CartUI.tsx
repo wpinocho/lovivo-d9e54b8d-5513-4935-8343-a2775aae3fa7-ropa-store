@@ -7,6 +7,7 @@ import { EcommerceTemplate } from "@/templates/EcommerceTemplate"
 import { Minus, Plus, Trash2, ShoppingCart, ArrowLeft } from "lucide-react"
 import { Link } from "react-router-dom"
 import { formatMoney } from "@/lib/money"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 /**
  * EDITABLE UI COMPONENT - CartUI
@@ -52,6 +53,8 @@ interface CartUIProps {
 }
 
 export const CartUI = ({ logic }: CartUIProps) => {
+  const { t } = useLanguage()
+  
   return (
     <EcommerceTemplate 
       pageTitle="Your Cart"
@@ -62,13 +65,13 @@ export const CartUI = ({ logic }: CartUIProps) => {
           <div className="text-center py-16">
             <ShoppingCart className="mx-auto h-16 w-16 text-muted-foreground mb-4" />
             <h2 className="text-2xl font-semibold mb-4">
-              Your cart is empty
+              {t('cart.empty')}
             </h2>
             <p className="text-muted-foreground mb-8 text-lg">
-              Add some products to start your purchase
+              {t('cart.emptymsg')}
             </p>
             <Button onClick={logic.handleNavigateHome} size="lg">
-              Continue Shopping
+              {t('cart.continue')}
             </Button>
           </div>
         ) : (
@@ -77,7 +80,7 @@ export const CartUI = ({ logic }: CartUIProps) => {
             <div className="lg:col-span-2 space-y-6">
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-semibold">
-                  Products ({logic.itemCount})
+                  {t('cart.products')} ({logic.itemCount})
                 </h2>
                 <Button
                   variant="ghost"
@@ -85,7 +88,7 @@ export const CartUI = ({ logic }: CartUIProps) => {
                   className="text-muted-foreground"
                 >
                   <ArrowLeft className="mr-2 h-4 w-4" />
-                  Continue shopping
+                  {t('cart.continue')}
                 </Button>
               </div>
               
@@ -158,7 +161,7 @@ export const CartUI = ({ logic }: CartUIProps) => {
                               className="text-destructive hover:text-destructive"
                             >
                               <Trash2 className="h-4 w-4 mr-2" />
-                              Remove
+                              {t('cart.remove')}
                             </Button>
                           </div>
                         </div>
@@ -174,12 +177,12 @@ export const CartUI = ({ logic }: CartUIProps) => {
               <div className="sticky top-24">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Order Summary</CardTitle>
+                    <CardTitle>{t('cart.title')}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span>Subtotal ({logic.itemCount} items)</span>
+                        <span>{t('cart.subtotal')} ({logic.itemCount} {t('cart.items')})</span>
                         <span>{formatMoney(logic.total, logic.currencyCode)}</span>
                       </div>
                     </div>
@@ -187,7 +190,7 @@ export const CartUI = ({ logic }: CartUIProps) => {
                     <Separator />
                     
                     <div className="flex justify-between text-lg font-bold">
-                      <span>Total</span>
+                      <span>{t('cart.total')}</span>
                       <span>{formatMoney(logic.total, logic.currencyCode)}</span>
                     </div>
 
@@ -201,7 +204,7 @@ export const CartUI = ({ logic }: CartUIProps) => {
                         }}
                         disabled={logic.isCreatingOrder}
                       >
-                        {logic.isCreatingOrder ? 'Processing...' : 'Checkout'}
+                        {logic.isCreatingOrder ? t('common.loading') : t('cart.checkout')}
                       </Button>
 
                       <Button 
@@ -209,7 +212,7 @@ export const CartUI = ({ logic }: CartUIProps) => {
                         className="w-full" 
                         onClick={logic.handleNavigateHome}
                       >
-                        Continue Shopping
+                        {t('cart.continue')}
                       </Button>
                     </div>
                   </CardContent>

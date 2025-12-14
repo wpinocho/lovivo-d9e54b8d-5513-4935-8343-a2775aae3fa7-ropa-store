@@ -1,6 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { type Collection } from '@/lib/supabase'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface CollectionCardProps {
   collection: Collection
@@ -8,6 +9,8 @@ interface CollectionCardProps {
 }
 
 export const CollectionCard = ({ collection, onViewProducts }: CollectionCardProps) => {
+  const { t } = useLanguage()
+  
   return (
     <Card className="group border-0 overflow-hidden hover:shadow-2xl transition-shadow duration-300 cursor-pointer" onClick={() => onViewProducts(collection.id)}>
       <CardContent className="p-0">
@@ -40,7 +43,7 @@ export const CollectionCard = ({ collection, onViewProducts }: CollectionCardPro
               variant="outline" 
               className="border-white text-white hover:bg-white hover:text-black transition-all font-light tracking-wide"
             >
-              Explorar
+              {t('collections.explore')}
             </Button>
           </div>
         </div>
