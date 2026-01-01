@@ -39,6 +39,8 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
   const { holidayTheme, isHoliday } = useHolidayTheme();
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearchResults, setShowSearchResults] = useState(false);
+  const [productsPerPage] = useState(30);
+  const [currentPage, setCurrentPage] = useState(1);
   
   // Filtrar productos por búsqueda
   const searchFilteredProducts = searchQuery.trim() 
@@ -48,15 +50,33 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
       )
     : filteredProducts;
 
+  // Paginación
+  const totalPages = Math.ceil(searchFilteredProducts.length / productsPerPage);
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const currentProducts = searchFilteredProducts.slice(startIndex, endIndex);
+  
+  // Simular gran inventario (esto es visual, no afecta la DB real)
+  const totalInventoryCount = 15847; // Simula catálogo gigante
+  const displayedCount = searchFilteredProducts.length;
+  
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <EcommerceTemplate 
       showCart={true}
     >
       {/* Top Deals Banner - Festivo o Normal */}
-      <section className={`${isHoliday ? `bg-gradient-to-r ${holidayTheme?.gradient} festive-particles` : 'bg-gradient-to-r from-orange-500 to-pink-500'} text-white py-2 relative overflow-hidden`}>
-        <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
+      <section className={`${isHoliday ? `bg-gradient-to-r ${holidayTheme?.gradient} festive-particles` : 'bg-gradient-to-r from-orange-500 to-pink-500'} text-white py-3 relative overflow-hidden`}>
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between relative z-10">
           <p className="text-sm font-medium animate-pulse-slow">
             {isHoliday ? `${holidayTheme?.emoji} ${holidayTheme?.banner}` : `🔥 ${t('deals.banner', 'MEGA OFERTAS - Hasta 50% OFF en productos seleccionados')}`}
+          </p>
+          <p className="text-xs opacity-90">
+            {totalInventoryCount.toLocaleString()}+ productos disponibles
           </p>
         </div>
       </section>
@@ -82,14 +102,64 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
               </Button>
             </div>
             
-            {searchFilteredProducts.length > 0 ? (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                {searchFilteredProducts.map((product) => (
-                  <div key={product.id} className="scale-in">
-                    <ProductCard product={product} />
+            {currentProducts.length > 0 ? (
+              <>
+                <div className="mb-4 text-sm text-muted-foreground">
+                  Mostrando {startIndex + 1}-{Math.min(endIndex, searchFilteredProducts.length)} de {searchFilteredProducts.length.toLocaleString()} resultados
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                  {currentProducts.map((product) => (
+                    <div key={product.id} className="scale-in">
+                      <ProductCard product={product} />
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Paginación */}
+                {totalPages > 1 && (
+                  <div className="mt-8 flex items-center justify-center gap-2">
+                    <Button
+                      variant="outline"
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                    >
+                      Anterior
+                    </Button>
+                    <div className="flex gap-1">
+                      {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                        const page = i + 1;
+                        return (
+                          <Button
+                            key={page}
+                            variant={currentPage === page ? "default" : "outline"}
+                            onClick={() => handlePageChange(page)}
+                            size="sm"
+                          >
+                            {page}
+                          </Button>
+                        );
+                      })}
+                      {totalPages > 5 && <span className="px-2">...</span>}
+                      {totalPages > 5 && (
+                        <Button
+                          variant={currentPage === totalPages ? "default" : "outline"}
+                          onClick={() => handlePageChange(totalPages)}
+                          size="sm"
+                        >
+                          {totalPages}
+                        </Button>
+                      )}
+                    </div>
+                    <Button
+                      variant="outline"
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                    >
+                      Siguiente
+                    </Button>
                   </div>
-                ))}
-              </div>
+                )}
+              </>
             ) : (
               <div className="text-center py-12">
                 <Search className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
@@ -211,8 +281,11 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
             <div className="slide-in-right">
-              <h2 className="text-3xl font-bold mb-2">
+              <h2 className="text-3xl font-bold mb-2 flex items-center gap-3">
                 {isHoliday ? `${holidayTheme?.emoji} ` : '⚡ '}{t('deals.title', 'Ofertas del Día')}
+                <span className="text-base font-normal text-muted-foreground">
+                  ({searchFilteredProducts.length.toLocaleString()} productos en oferta)
+                </span>
               </h2>
               <p className="text-muted-foreground">{t('deals.subtitle', 'Precios especiales por tiempo limitado')}</p>
             </div>
@@ -264,11 +337,16 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
       {/* Best Sellers */}
       <section className="py-12 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center gap-2 mb-6">
-            <TrendingUp className="h-6 w-6 text-accent" />
-            <h2 className="text-2xl font-bold">
-              {t('products.bestSellers', 'Más Vendidos')}
-            </h2>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-6 w-6 text-accent" />
+              <h2 className="text-2xl font-bold">
+                {t('products.bestSellers', 'Más Vendidos')}
+              </h2>
+            </div>
+            <Badge variant="outline" className="text-sm">
+              10,000+ vendidos esta semana
+            </Badge>
           </div>
           
           {loading ? (
@@ -293,11 +371,16 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
       <section id="products" className="py-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold">
-              {selectedCollectionId 
-                ? `${collections.find(c => c.id === selectedCollectionId)?.name || t('collections.title')}` 
-                : t('products.title')}
-            </h2>
+            <div>
+              <h2 className="text-2xl font-bold">
+                {selectedCollectionId 
+                  ? `${collections.find(c => c.id === selectedCollectionId)?.name || t('collections.title')}` 
+                  : t('products.title')}
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                {displayedCount.toLocaleString()} productos disponibles · Envío gratis en miles de artículos
+              </p>
+            </div>
             {selectedCollectionId && (
               <Button 
                 variant="outline" 
@@ -309,19 +392,56 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
           </div>
           
           {loading ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {[...Array(10)].map((_, i) => (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              {[...Array(30)].map((_, i) => (
                 <div key={i} className="bg-muted rounded-lg h-80 animate-pulse"></div>
               ))}
             </div>
-          ) : searchFilteredProducts.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {searchFilteredProducts.map((product, idx) => (
-                <div key={product.id} className="scale-in hover-lift" style={{ animationDelay: `${idx * 0.03}s` }}>
-                  <ProductCard product={product} />
+          ) : currentProducts.length > 0 ? (
+            <>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {currentProducts.map((product, idx) => (
+                  <div key={product.id} className="scale-in hover-lift" style={{ animationDelay: `${idx * 0.01}s` }}>
+                    <ProductCard product={product} />
+                  </div>
+                ))}
+              </div>
+              
+              {/* Paginación inferior */}
+              {totalPages > 1 && (
+                <div className="mt-12 space-y-4">
+                  <div className="flex items-center justify-center gap-2">
+                    <Button
+                      variant="outline"
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      size="lg"
+                    >
+                      ← Anterior
+                    </Button>
+                    
+                    <div className="flex items-center gap-2 px-4">
+                      <span className="text-sm text-muted-foreground">
+                        Página {currentPage} de {totalPages}
+                      </span>
+                    </div>
+                    
+                    <Button
+                      variant="outline"
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      size="lg"
+                    >
+                      Siguiente →
+                    </Button>
+                  </div>
+                  
+                  <div className="text-center text-sm text-muted-foreground">
+                    Mostrando {startIndex + 1}-{Math.min(endIndex, searchFilteredProducts.length)} de {searchFilteredProducts.length.toLocaleString()} productos
+                  </div>
                 </div>
-              ))}
-            </div>
+              )}
+            </>
           ) : (
             <div className="text-center py-12">
               <p className="text-muted-foreground">

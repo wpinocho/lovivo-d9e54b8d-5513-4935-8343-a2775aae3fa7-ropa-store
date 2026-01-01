@@ -117,52 +117,131 @@ export const EcommerceTemplate = ({
   )
 
   const footer = (
-    <div className={`bg-primary text-primary-foreground py-16 ${footerClassName}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Brand */}
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <img 
-                src="/logo.svg" 
-                alt="Style Logo"
-                className="h-10 w-10 object-contain invert" 
-              />
-              <span className="text-2xl font-light tracking-widest">STYLE</span>
+    <div className={`bg-primary text-primary-foreground ${footerClassName}`}>
+      {/* Main Footer */}
+      <div className="py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+            {/* Brand */}
+            <div className="lg:col-span-2">
+              <div className="flex items-center gap-3 mb-4">
+                <img 
+                  src="/logo.svg" 
+                  alt="Style Logo"
+                  className="h-10 w-10 object-contain invert" 
+                />
+                <span className="text-2xl font-light tracking-widest">STYLE</span>
+              </div>
+              <p className="mt-4 font-light tracking-wide opacity-70 text-sm">
+                {t('footer.tagline')}
+              </p>
+              <div className="mt-6">
+                <h3 className="font-light tracking-widest uppercase text-xs mb-3 opacity-90">{t('footer.follow')}</h3>
+                <SocialLinks />
+              </div>
             </div>
-            <p className="mt-4 font-light tracking-wide opacity-70">
-              {t('footer.tagline')}
-            </p>
-          </div>
 
-          {/* Links */}
-          <div>
-            <h3 className="font-light tracking-widest uppercase text-sm mb-4">{t('footer.links')}</h3>
-            <div className="space-y-2">
-              <Link 
-                to="/" 
-                className="block font-light opacity-70 hover:opacity-100 transition-opacity"
-              >
-                {t('footer.home')}
-              </Link>
-              <Link 
-                to="/blog" 
-                className="block font-light opacity-70 hover:opacity-100 transition-opacity"
-              >
-                {t('nav.blog')}
-              </Link>
+            {/* Conócenos */}
+            <div>
+              <h3 className="font-medium text-sm mb-4">Conócenos</h3>
+              <div className="space-y-2">
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Sobre Nosotros
+                </Link>
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Carreras
+                </Link>
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Inversores
+                </Link>
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Sostenibilidad
+                </Link>
+              </div>
             </div>
-          </div>
 
-          {/* Social Links */}
-          <div>
-            <h3 className="font-light tracking-widest uppercase text-sm mb-4">{t('footer.follow')}</h3>
-            <SocialLinks />
+            {/* Atención al Cliente */}
+            <div>
+              <h3 className="font-medium text-sm mb-4">Atención al Cliente</h3>
+              <div className="space-y-2">
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Centro de Ayuda
+                </Link>
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Envíos
+                </Link>
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Devoluciones
+                </Link>
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Garantías
+                </Link>
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Contacto
+                </Link>
+              </div>
+            </div>
+
+            {/* Comprar */}
+            <div>
+              <h3 className="font-medium text-sm mb-4">Comprar</h3>
+              <div className="space-y-2">
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Ofertas del Día
+                </Link>
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Categorías
+                </Link>
+                <Link to="/blog" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Blog
+                </Link>
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Gift Cards
+                </Link>
+              </div>
+            </div>
+
+            {/* Mi Cuenta */}
+            <div>
+              <h3 className="font-medium text-sm mb-4">Mi Cuenta</h3>
+              <div className="space-y-2">
+                <Link to="/my-orders" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Mis Pedidos
+                </Link>
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Lista de Deseos
+                </Link>
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Suscripciones
+                </Link>
+                <Link to="/" className="block text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  Perfil
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div className="mt-12 pt-8 border-t border-primary-foreground/20 text-center opacity-60">
-          <p className="font-light tracking-wide">&copy; 2025 Style. {t('footer.rights')}.</p>
+      {/* Bottom Footer */}
+      <div className="bg-primary-foreground/10 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+            <p className="opacity-70">
+              &copy; 2025 Style. {t('footer.rights')}.
+            </p>
+            <div className="flex items-center gap-6">
+              <Link to="/" className="opacity-70 hover:opacity-100 transition-opacity">
+                Términos y Condiciones
+              </Link>
+              <Link to="/" className="opacity-70 hover:opacity-100 transition-opacity">
+                Privacidad
+              </Link>
+              <Link to="/" className="opacity-70 hover:opacity-100 transition-opacity">
+                Cookies
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
