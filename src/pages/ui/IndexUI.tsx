@@ -57,7 +57,7 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
   const currentProducts = searchFilteredProducts.slice(startIndex, endIndex);
   
   // Simular gran inventario (esto es visual, no afecta la DB real)
-  const totalInventoryCount = 15847; // Simula catálogo gigante
+  const totalInventoryCount = 300847; // Simula catálogo gigante tipo Amazon
   const displayedCount = searchFilteredProducts.length;
   
   const handlePageChange = (newPage: number) => {
@@ -344,8 +344,8 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
                 {t('products.bestSellers', 'Más Vendidos')}
               </h2>
             </div>
-            <Badge variant="outline" className="text-sm">
-              10,000+ vendidos esta semana
+            <Badge variant="outline" className="text-sm animate-pulse-slow">
+              🔥 87,422 vendidos hoy
             </Badge>
           </div>
           

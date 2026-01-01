@@ -37,7 +37,9 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
                   <img
                     src={(logic.matchingVariant?.image as any) || logic.product.images![0]}
                     alt={logic.product.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    style={{ imageRendering: 'crisp-edges' }}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -149,13 +151,15 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
                 variant="outline"
                 size="sm"
                 onClick={() => {
-                  logic.onAddToCartSuccess()
-                  logic.handleAddToCart()
+                  if (logic.canAddToCart) {
+                    logic.handleAddToCart()
+                    logic.onAddToCartSuccess()
+                  }
                 }}
                 disabled={!logic.canAddToCart}
-                className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground disabled:opacity-50 font-light tracking-wide"
+                className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground disabled:opacity-50 font-light tracking-wide transition-all duration-300 hover:shadow-lg active:scale-95"
               >
-                {logic.inStock ? t('products.addtocart') : t('products.soldout')}
+                {logic.inStock ? `🛒 ${t('products.addtocart')}` : t('products.soldout')}
               </Button>
             </div>
           </CardContent>

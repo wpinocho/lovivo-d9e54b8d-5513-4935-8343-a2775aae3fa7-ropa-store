@@ -97,12 +97,14 @@ export const CartUI = ({ logic }: CartUIProps) => {
                   <CardContent className="p-6">
                     <div className="flex items-start space-x-4">
                       {/* Product Image */}
-                      <div className="w-24 h-24 bg-muted rounded-lg overflow-hidden flex-shrink-0">
+                      <div className="w-24 h-24 bg-muted rounded-lg overflow-hidden flex-shrink-0 hover:scale-110 transition-transform duration-300">
                         {item.product.images && item.product.images.length > 0 || item.variant?.image ? (
                           <img
                             src={item.variant?.image || item.product.images![0]}
                             alt={item.product.title}
+                            loading="lazy"
                             className="w-full h-full object-cover"
+                            style={{ imageRendering: 'high-quality' }}
                           />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-muted-foreground text-sm">
@@ -196,7 +198,7 @@ export const CartUI = ({ logic }: CartUIProps) => {
 
                     <div className="space-y-3 pt-4">
                       <Button 
-                        className="w-full" 
+                        className="w-full transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-95" 
                         size="lg" 
                         onClick={() => {
                           logic.onCheckoutStart()
@@ -204,15 +206,15 @@ export const CartUI = ({ logic }: CartUIProps) => {
                         }}
                         disabled={logic.isCreatingOrder}
                       >
-                        {logic.isCreatingOrder ? t('common.loading') : t('cart.checkout')}
+                        {logic.isCreatingOrder ? '⏳ ' + t('common.loading') : '💳 ' + t('cart.checkout')}
                       </Button>
 
                       <Button 
                         variant="outline" 
-                        className="w-full" 
+                        className="w-full hover:shadow-md transition-all duration-300" 
                         onClick={logic.handleNavigateHome}
                       >
-                        {t('cart.continue')}
+                        🛍️ {t('cart.continue')}
                       </Button>
                     </div>
                   </CardContent>

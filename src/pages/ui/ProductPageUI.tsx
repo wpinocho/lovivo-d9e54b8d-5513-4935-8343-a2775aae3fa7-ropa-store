@@ -102,12 +102,15 @@ export const ProductPageUI = ({ logic }: ProductPageUIProps) => {
     <EcommerceTemplate>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Product Image */}
-        <div className="aspect-square rounded-lg overflow-hidden bg-muted">
+        <div className="aspect-square rounded-lg overflow-hidden bg-muted relative group">
           <img
             src={logic.currentImage || "/placeholder.svg"}
             alt={logic.product.title}
-            className="w-full h-full object-cover"
+            loading="eager"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            style={{ imageRendering: 'high-quality' }}
           />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
         </div>
 
         {/* Product Details */}
@@ -206,15 +209,15 @@ export const ProductPageUI = ({ logic }: ProductPageUIProps) => {
               <Button
                 onClick={logic.handleAddToCart}
                 disabled={!logic.inStock}
-                className="flex-1"
+                className="flex-1 transition-all duration-300 hover:shadow-xl active:scale-95"
                 size="lg"
               >
-                <ShoppingCart className="mr-2 h-4 w-4" />
-                {logic.inStock ? 'Add to cart' : 'Out of stock'}
+                <ShoppingCart className="mr-2 h-5 w-5" />
+                {logic.inStock ? 'Agregar al Carrito' : 'Agotado'}
               </Button>
               
               {!logic.inStock && (
-                <Badge variant="secondary">Out of stock</Badge>
+                <Badge variant="secondary" className="animate-pulse">Agotado</Badge>
               )}
             </div>
           </div>

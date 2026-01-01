@@ -96,12 +96,14 @@ export const CartSidebar = ({ isOpen, onClose }: CartSidebarProps) => {
                   <Card key={item.key}>
                     <CardContent className="p-4">
                       <div className="flex items-start space-x-3">
-                        <div className="w-16 h-16 bg-muted rounded-md overflow-hidden flex-shrink-0">
+                        <div className="w-16 h-16 bg-muted rounded-md overflow-hidden flex-shrink-0 hover:scale-110 transition-transform duration-300">
                           {item.product.images && item.product.images.length > 0 || item.variant?.image ? (
                             <img
                               src={item.variant?.image || item.product.images![0]}
                               alt={item.product.title}
+                              loading="lazy"
                               className="w-full h-full object-cover"
+                              style={{ imageRendering: 'crisp-edges' }}
                             />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs">
@@ -169,12 +171,12 @@ export const CartSidebar = ({ isOpen, onClose }: CartSidebarProps) => {
                 </div>
 
                 <Button 
-                  className="w-full mt-4 font-light tracking-wide" 
+                  className="w-full mt-4 font-light tracking-wide transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-95" 
                   size="lg" 
                   onClick={handleCreateCheckout} 
                   disabled={isCreatingOrder}
                 >
-                  {isCreatingOrder ? 'Procesando...' : 'Finalizar Compra'}
+                  {isCreatingOrder ? '⏳ Procesando...' : '💳 Finalizar Compra'}
                 </Button>
               </div>
             </>
