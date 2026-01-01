@@ -17,6 +17,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.products': 'Productos',
     'nav.blog': 'Blog',
     'nav.cart': 'Carrito',
+    'nav.allCategories': 'Todas las categorías',
+    'nav.deals': 'Ofertas',
     
     // Hero
     'hero.title': 'Descubre Tu Estilo',
@@ -26,6 +28,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Collections
     'collections.title': 'Nuestras Colecciones',
     'collections.explore': 'Explorar',
+    'collections.browseAll': 'Ver categorías',
+    'collections.shopByCategory': 'Comprar por Categoría',
     
     // Products
     'products.title': 'Productos Destacados',
@@ -33,6 +37,8 @@ const translations: Record<Language, Record<string, string>> = {
     'products.soldout': 'Agotado',
     'products.addtocart': 'Agregar al Carrito',
     'products.viewmore': 'Ver Más Productos',
+    'products.bestSellers': 'Más Vendidos',
+    'products.noProducts': 'No hay productos disponibles.',
     
     // Cart
     'cart.title': 'Tu Carrito',
@@ -81,6 +87,21 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.home': 'Inicio',
     'footer.follow': 'Síguenos',
     'footer.rights': 'Todos los derechos reservados',
+    'footer.aboutUs': 'Conócenos',
+    'footer.about': 'Sobre nosotros',
+    'footer.careers': 'Careers',
+    'footer.customerService': 'Atención al Cliente',
+    'footer.contact': 'Contacto',
+    'footer.returns': 'Devoluciones',
+    'footer.shipping': 'Envíos',
+    'footer.shop': 'Comprar',
+    'footer.account': 'Mi Cuenta',
+    'footer.orders': 'Mis pedidos',
+    'footer.wishlist': 'Lista de deseos',
+    'footer.legal': 'Legal',
+    'footer.privacy': 'Privacidad',
+    'footer.terms': 'Términos',
+    'footer.cookies': 'Cookies',
     
     // Product Detail
     'product.price': 'Precio',
@@ -96,12 +117,40 @@ const translations: Record<Language, Record<string, string>> = {
     'orders.status': 'Estado',
     'orders.total': 'Total',
     
+    // Header
+    'header.deliverTo': 'Entregar en',
+    'header.searchPlaceholder': 'Buscar productos...',
+    
+    // Trust
+    'trust.shipping': 'Envío Gratis',
+    'trust.shippingDesc': 'En pedidos +$50',
+    'trust.secure': 'Pago Seguro',
+    'trust.secureDesc': '100% protegido',
+    'trust.quality': 'Mejor Calidad',
+    'trust.qualityDesc': 'Productos premium',
+    'trust.trending': 'Tendencias',
+    'trust.trendingDesc': 'Lo más vendido',
+    
+    // Deals
+    'deals.banner': 'MEGA OFERTAS - Hasta 50% OFF en productos seleccionados',
+    'deals.title': 'Ofertas del Día',
+    'deals.subtitle': 'Precios especiales por tiempo limitado',
+    'deals.limited': 'LIMITADO',
+    
     // Common
     'common.loading': 'Cargando...',
     'common.error': 'Error',
     'common.success': 'Éxito',
     'common.free': 'GRATIS',
     'common.discount': 'Descuento',
+    
+    // Search
+    'search.placeholder': 'Buscar productos...',
+    'search.results': 'Resultados para',
+    'search.all': 'Todos los productos',
+    'search.close': 'Cerrar',
+    'search.noResults': 'No se encontraron productos',
+    'search.tryAgain': 'Intenta con otros términos de búsqueda',
   },
   en: {
     // Navigation
@@ -109,6 +158,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.products': 'Products',
     'nav.blog': 'Blog',
     'nav.cart': 'Cart',
+    'nav.allCategories': 'All categories',
+    'nav.deals': 'Deals',
     
     // Hero
     'hero.title': 'Discover Your Style',
@@ -118,6 +169,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Collections
     'collections.title': 'Our Collections',
     'collections.explore': 'Explore',
+    'collections.browseAll': 'View categories',
+    'collections.shopByCategory': 'Shop by Category',
     
     // Products
     'products.title': 'Featured Products',
@@ -125,6 +178,8 @@ const translations: Record<Language, Record<string, string>> = {
     'products.soldout': 'Sold Out',
     'products.addtocart': 'Add to Cart',
     'products.viewmore': 'View More Products',
+    'products.bestSellers': 'Best Sellers',
+    'products.noProducts': 'No products available.',
     
     // Cart
     'cart.title': 'Your Cart',
@@ -173,6 +228,21 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.home': 'Home',
     'footer.follow': 'Follow Us',
     'footer.rights': 'All rights reserved',
+    'footer.aboutUs': 'Get to Know Us',
+    'footer.about': 'About us',
+    'footer.careers': 'Careers',
+    'footer.customerService': 'Customer Service',
+    'footer.contact': 'Contact',
+    'footer.returns': 'Returns',
+    'footer.shipping': 'Shipping',
+    'footer.shop': 'Shop',
+    'footer.account': 'My Account',
+    'footer.orders': 'My orders',
+    'footer.wishlist': 'Wishlist',
+    'footer.legal': 'Legal',
+    'footer.privacy': 'Privacy',
+    'footer.terms': 'Terms',
+    'footer.cookies': 'Cookies',
     
     // Product Detail
     'product.price': 'Price',
@@ -188,12 +258,40 @@ const translations: Record<Language, Record<string, string>> = {
     'orders.status': 'Status',
     'orders.total': 'Total',
     
+    // Header
+    'header.deliverTo': 'Deliver to',
+    'header.searchPlaceholder': 'Search products...',
+    
+    // Trust
+    'trust.shipping': 'Free Shipping',
+    'trust.shippingDesc': 'On orders +$50',
+    'trust.secure': 'Secure Payment',
+    'trust.secureDesc': '100% protected',
+    'trust.quality': 'Best Quality',
+    'trust.qualityDesc': 'Premium products',
+    'trust.trending': 'Trending',
+    'trust.trendingDesc': 'Best sellers',
+    
+    // Deals
+    'deals.banner': 'MEGA DEALS - Up to 50% OFF on selected products',
+    'deals.title': 'Today\'s Deals',
+    'deals.subtitle': 'Special prices for limited time',
+    'deals.limited': 'LIMITED',
+    
     // Common
     'common.loading': 'Loading...',
     'common.error': 'Error',
     'common.success': 'Success',
     'common.free': 'FREE',
     'common.discount': 'Discount',
+    
+    // Search
+    'search.placeholder': 'Search products...',
+    'search.results': 'Results for',
+    'search.all': 'All products',
+    'search.close': 'Close',
+    'search.noResults': 'No products found',
+    'search.tryAgain': 'Try different search terms',
   },
   fr: {
     // Navigation
@@ -201,6 +299,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.products': 'Produits',
     'nav.blog': 'Blog',
     'nav.cart': 'Panier',
+    'nav.allCategories': 'Toutes les catégories',
+    'nav.deals': 'Offres',
     
     // Hero
     'hero.title': 'Découvrez Votre Style',
@@ -210,6 +310,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Collections
     'collections.title': 'Nos Collections',
     'collections.explore': 'Explorer',
+    'collections.browseAll': 'Voir les catégories',
+    'collections.shopByCategory': 'Acheter par Catégorie',
     
     // Products
     'products.title': 'Produits en Vedette',
@@ -217,6 +319,8 @@ const translations: Record<Language, Record<string, string>> = {
     'products.soldout': 'Épuisé',
     'products.addtocart': 'Ajouter au Panier',
     'products.viewmore': 'Voir Plus de Produits',
+    'products.bestSellers': 'Meilleures Ventes',
+    'products.noProducts': 'Aucun produit disponible.',
     
     // Cart
     'cart.title': 'Votre Panier',
@@ -265,6 +369,21 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.home': 'Accueil',
     'footer.follow': 'Suivez-nous',
     'footer.rights': 'Tous droits réservés',
+    'footer.aboutUs': 'Apprenez à Nous Connaître',
+    'footer.about': 'À propos',
+    'footer.careers': 'Carrières',
+    'footer.customerService': 'Service Client',
+    'footer.contact': 'Contact',
+    'footer.returns': 'Retours',
+    'footer.shipping': 'Expédition',
+    'footer.shop': 'Boutique',
+    'footer.account': 'Mon Compte',
+    'footer.orders': 'Mes commandes',
+    'footer.wishlist': 'Liste de souhaits',
+    'footer.legal': 'Légal',
+    'footer.privacy': 'Confidentialité',
+    'footer.terms': 'Conditions',
+    'footer.cookies': 'Cookies',
     
     // Product Detail
     'product.price': 'Prix',
@@ -280,12 +399,40 @@ const translations: Record<Language, Record<string, string>> = {
     'orders.status': 'Statut',
     'orders.total': 'Total',
     
+    // Header
+    'header.deliverTo': 'Livrer à',
+    'header.searchPlaceholder': 'Rechercher des produits...',
+    
+    // Trust
+    'trust.shipping': 'Livraison Gratuite',
+    'trust.shippingDesc': 'Sur commandes +50$',
+    'trust.secure': 'Paiement Sécurisé',
+    'trust.secureDesc': '100% protégé',
+    'trust.quality': 'Meilleure Qualité',
+    'trust.qualityDesc': 'Produits premium',
+    'trust.trending': 'Tendances',
+    'trust.trendingDesc': 'Les meilleures ventes',
+    
+    // Deals
+    'deals.banner': 'MÉGA OFFRES - Jusqu\'\u00e0 50% de réduction sur produits sélectionnés',
+    'deals.title': 'Offres du Jour',
+    'deals.subtitle': 'Prix spéciaux pour une durée limitée',
+    'deals.limited': 'LIMITÉ',
+    
     // Common
     'common.loading': 'Chargement...',
     'common.error': 'Erreur',
     'common.success': 'Succès',
     'common.free': 'GRATUIT',
     'common.discount': 'Réduction',
+    
+    // Search
+    'search.placeholder': 'Rechercher des produits...',
+    'search.results': 'Résultats pour',
+    'search.all': 'Tous les produits',
+    'search.close': 'Fermer',
+    'search.noResults': 'Aucun produit trouvé',
+    'search.tryAgain': 'Essayez d\'autres termes de recherche',
   }
 }
 
